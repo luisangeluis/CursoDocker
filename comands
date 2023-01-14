@@ -1,0 +1,69 @@
+//Crear contenedor
+docker run ubuntu echo 'hello world'
+docker create -p 27017:27017 --name monguito -e MONGO_INITDB_ROOT_USERNAME=nico -e MONGO_INITDB_ROOT_PASSWORD=password mongo
+//Ver contenedores activos
+docker ps
+//Ver todos los contenedores
+docker ps -a
+//****************
+//DOCKER CLI
+//****************
+//Version del docke
+docker --version
+//Ver todos los comandos existentes
+docker --help
+//Info del docker 
+docker info
+//Guardar info de todos mis contenedores en json
+docker info --format '{{json .}}' > docker-config.json
+//Ver mis imagenes
+docker images
+docker image ls
+//Corre servidor nginx emparejando mi puerto local 8080 con el puerto de nginx 80
+docker run -p 8080:80 nginx
+docker run -p 8080:80 -d nginx //Con este la consola no se bloquea
+//Nombrar un contenedor
+docker run --name nombre-contenedor -p 8080:80 -d nginx
+//Renombrar un contenedor
+docker rename old-name new-name
+//Para que el contenedor no muera
+docker run -dt nombredelcontenedor ejemplo: docker run -dt ubuntu
+MINUTO 10 RESTANTE
+//Ver los contenedores
+docker container ls
+docker ps
+docker ps --all // todos los contenedores
+docker ps -a
+//ver id de los contenedores levantados
+docker ps --quiet
+//entrar a consola del contenedor
+docker exec -ti nombreDelContenedor bash
+//Detener el contenedor
+docker stop nombreDelContenedor
+docker stop idDelContenedor
+//Levantar el contenedor
+docker start idDelContenedor
+//Eliminar un contenedor
+docker rm -f idDelContenedor //Forza a eliminarlo aunque esté corriendo.
+//Eliminar una imagene
+docker image rm node:18 //poner que node seria si aplica
+//ver los logs del contenedor
+docker logs nombreDelContenedor
+//ver en tiempo real cuando se ejecuta un log
+docker logs --follow nombreDelContenedor
+//Ver todas mis redes de docker
+//Las redes son para que varios contenedores se comuniquen entre si.
+docker network ls
+//Eliminar red
+docker network rm nombreDeRed
+//Crear imagenes en base a un archivo docker file
+//nombreApp:1 Es un ejemplo de versionado o algo asi y el punto indica que estamos en la misma direccion donde está
+//docker file
+docker build -t nombreApp:1 .
+//Para crear o levantar las configuraciones de docker compose (conectar contenedores y su red)
+docker compose up
+//Eliminar la red y contenedores configurados en el archivo docker compose
+docker compose down
+//Para crear o levantar las configuraciones de docker compose (conectar contenedores y su red)
+//ELIGIENDO EL ARCHIVO DOCKER-COMPOSE
+docker compose -f docker-compose-dev.yml up
