@@ -1,0 +1,11 @@
+<!-- Ver todas las images -->
+docker images
+
+<!-- Descargar una imagen -->
+docker pull node
+
+<!-- Descargar una imagen indicando la version-->
+docker pull node:18
+
+<!-- Borrar una imagen -->
+docker image rm node:18
