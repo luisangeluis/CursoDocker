@@ -9,3 +9,38 @@ docker pull node:18
 
 <!-- Borrar una imagen -->
 docker image rm node:18
+
+<!-- Crear un contenedor -->
+docker create nombreDeImagen
+docker create --name nombrePersonalizado nombreDeImagen
+
+<!-- Crear contenedor mapeando puertos -->
+<!-- El primer es que puerto quiero usar y el segundo es que puerto esta usando el contenedor -->
+docker create -p27017:27017 --name monguito mongo
+<!-- Segunda opcion sin puertos no recomendable!, docker decide los puertos -->
+docker create --name monguito mongo
+
+<!-- Iniciar un contenedor -->
+docker start idDelContenedor
+
+<!-- Ver todos mis contenedores que tengo -->
+docker ps -a
+
+<!-- Ver los contenedores que estan corriendo -->
+docker ps
+
+<!-- Detener un contenedor que esta corriendo -->
+docker stop idDelContenedor
+
+<!-- Borrar un contenedor -->
+docker rm nombreDeContedor
+docker rm idDelContenedor
+
+<!-- Monitorear el contenedor -->
+docker logs --follow monguito
+
+<!-- Busca la imagen, y la descarga si no la tengo. Crea e inicia el contedor a partir de esa image y la sigue con follow-->
+docker run mongo
+<!-- -d es para que me deje usar la misma terminal sin detener el contenedor-->
+docker run -d mongo
+docker run  --name monguito -p27017:27017 -d mongo
