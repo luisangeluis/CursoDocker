@@ -43,7 +43,7 @@ docker logs --follow monguito
 <!-- Busca la imagen, y la descarga si no la tengo. Crea e inicia el contedor a partir de esa image y la sigue con follow-->
 docker run mongo
 
-<!-- -d es para que me deje usar la misma terminal sin detener el contenedor-->
+# <!-- -d es para que me deje usar la misma terminal sin detener el contenedor-->
 docker run -d mongo
 docker run  --name monguito -p27017:27017 -d mongo
 
@@ -56,7 +56,29 @@ docker network create mired
 # Borrar una red
 docker network rm nombreDeLaRed
 
-#Crea o configura en base al archivo Dockerfile
-docker build
+#Crea o configura (una imagen) en base al archivo Dockerfile
+# indicas el nombre de tu imagen personalizada, el nombre de una etiqueta cualquiera
+# y el punto es la ruta de donde estas a partir con referencia al archivo Dockerfile
+docker build -t miapp:1 .
+
+# CONECTAR LOS CONTENEDORES MANUALMENTE (en la red mired)
+# 1.-Crear el contenedor de mongo
+docker create -p27027:27027 --name monguito --network mired -e MONGO_INITDB_ROOT_USERNAME=nico 
+-e MONGO_INITDB_ROOT_PASSWORD=password mongo
+
+# 2.- Crear el contenedor a partir de mi imagen personlizada (mi:app, fue creada a partir de mi Dockerfile
+# que a su vez ya contine node)
+docker create -p3000:3000 --name chanchito --network mired miapp:1
+
+# CORRER EL ARCHIVO DE docker-compose
+docker compose up
+
+#DETENER LOS CONTENEDORES QUE SE CREARON CON DOCKER COMPOSE
+docker compose stop
+
+# BORRAR CONTENEDORES E IMAGENES Y CONFIGURADAS EN docker-compose.yml
+docker compose down
+
+
 
 
